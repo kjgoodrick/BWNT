@@ -192,13 +192,15 @@ var newtab = (function() {
         var date = new Date(),
             h = date.getHours(),
             h12,
-            m = date.getMinutes();
+            m = date.getMinutes(),
+            s = date.getSeconds();
 
         // Format hour to 12h
         h12 = h % 12;
         if (h12 === 0) h12 = 12;
 
         // Add trailing 0 for one digit numbers
+        this.second = s < 10 ? '0' + s : s;
         this.minute = m < 10 ? '0' + m : m;
         this.hour = h < 10 ? '0' + h : h;
         this.hour12 = h12;
@@ -215,7 +217,7 @@ var newtab = (function() {
         } else {
             h = this.hour;
         }
-        this._clock_elem.textContent = h + ':' + this.minute;
+        this._clock_elem.textContent = h + ':' + this.minute + ':' + this.second;
 
         if (this.show_date)
             this._date_elem.textContent = this.date;
